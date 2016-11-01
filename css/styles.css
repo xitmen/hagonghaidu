@@ -1,4 +1,9 @@
-There is no no-color option ("less --help" for help)
 @import "main.css";
-@gary: rgb(150, 150, 150);
-body{background-color:@gary; color:@gary; height:100px;}
+.open_left{margin-left:5rem}
+.lef_nav{
+    position:fixed;
+    top:0; left:0;
+    width:7rem;
+    bottom:0;
+    background-color:#000;
+}
