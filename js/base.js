@@ -102,6 +102,13 @@ $(function(){
 		var pageInfo;
 		var _pageInfo;
 		var _this;
+		var getPageInfo = function(){
+			var pageMapHtml = {
+				base: '<p>@{content}</p>',
+				video: '<div class="video"><video width="320" height="240" controls><source src="@{video_url}" type="video/mp4">您的浏览器不支持 video 标签。</video></div>',
+				product: '<div class="product"></div>'
+			}
+		};
 		// 绑定菜品区域
 		proBox.on('touchstart',function( e ){
 			if( loading ){
