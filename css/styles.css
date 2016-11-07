@@ -219,3 +219,8 @@ iframe {
   margin: .5rem auto;
   line-height: 1.5rem;
 }
+.product img {
+  display: block;
+  width: 14rem;
+  margin: 0.5rem auto;
+}

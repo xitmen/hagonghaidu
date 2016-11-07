@@ -10,36 +10,22 @@
     <meta name="format-detection" content="telphone=no" />
     <title>哈工海度</title>
     <link rel="stylesheet" type="text/css" href="css/styles.css">
+	<style type="text/css">
+		html,body{ width:100%; height:100%; }
+		body{
+			background-image:url("img/ic_applogo.png");
+			background-repeat:no-repeat;
+			background-position:center;
+		}
+	</style>
 </head>
-<body class="fixed_4" id="home">
-    <div class="lef_nav close">
-		<h1>
-			<p>哈工海渡教学<span>学海无涯,同舟共渡</span></p>
-		</h1>
-		<ul>
-			<li><a href="index.html?type=school">主页</a></li>
-			<li><a href="#">教学网站</a></li>
-			<li><a href="#">扫一扫</a></li>
-			<li><a href="info.html?id=999">关于我们</a></li>
-		</ul>
-	</div>
-	<div class="top_title">
-		<h2><i class="icon_menu"></i>哈工海渡教学</h2>
-	</div>
-	<div class="content">
-		<div class="top_nav">
-			<a href="index.html?type=school">学院</a>
-			<a href="index.html?type=knowledge">小知识</a>
-			<a href="search.html?type=search">机型速查</a>
-		</div>
-		<div class="item_list">
-		</div>
-	</div>
-	<script src="data/knowledge.js"></script>
-	<script src="data/model.js"></script>
-	<script src="data/video.js"></script>
+<body>
 	<script src="js/jquery-1.9.0.min.js"></script>
-	<script src="js/base.js?_=v1.1"></script>
+	<script type="text/javascript">
+		setTimeout( function(){
+			location.href = 'resource.html?type=school';
+		}, 800 );
+	</script>
 </body>
 </html>
 
