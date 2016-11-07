@@ -28,13 +28,21 @@ var getUrlParam = function(name, url) {
 	return result === null ? result: decodeURIComponent(result[2])
 };
 
+String.prototype.format = function(O){
+	var s = this.replace(/\@\{(\w+)\}/g, function(t, _o){
+		return O[_o];
+	});
+	return s;
+};
+
 $(function(){
 	var topMenu = $('.icon_menu');
 	var navLeft = $('.lef_nav');
-	var oBack = $('.icon_back');
 	var oBody = $('body');
 	var type = getUrlParam('type');
 	var topNavList = $('.top_nav a');
+	$.DATA = $.DATA || [];
+	$.DATA = $.DATA.concat( window.knowledge, window.model , window.video );
 	if( type == 'school' ) {
 		topNavList.eq(0).addClass('on');
 	}else if( type == 'knowledge' ){
@@ -42,9 +50,6 @@ $(function(){
 	}else if( type == 'search' ){
 		topNavList.eq(2).addClass('on');
 	}
-	oBack.on('click',function(){
-		history.go(-1);
-	});
 	topMenu.on('click',function(){
 		var _me = $(this);
 		if( navLeft.hasClass('close') ){
@@ -57,6 +62,82 @@ $(function(){
 	oBody.on('click',function(){
 		navLeft.removeClass('open').addClass('close');
 	});
+
+	var pageMapHtml = {
+			search: '<div class="top_title"><h2><i class="icon_back"></i>@{xh}</h2></div><div class="product"><ul><li><label>品牌</label>:@{pp}</li><li><label>型号</label>:@{xh}</li><li><label>工作空间</label>:@{gzkj}</li><li><label>有效负荷</label>:@{yxfh}</li><li><label>工作空间范围</label>:@{gzkjfw}</li><li><label>负荷范围</label>:@{fhfw}</li><li><label>系列</label>:@{xl}</li></ul><a href="data/html/jxsc/@{html}">查看具体详情</a> </div>',
+			school: '<div class="top_title"><h2><i class="icon_back"></i>@{title}</h2></div><div class="box"><video controls><source src="@{url}" type="video/mp4">您的浏览器不支持 video 标签。</video></div>',
+			knowledge: '<div class="top_title"><h2><i class="icon_back"></i>@{title}</h2></div><iframe src="data/html/xzs/@{html}"></iframe></div>',
+		},
+		pageIndexType = {
+			school: '<dl class="school"><dt>@{title}</dt><dd><a href="info.html?type=@{type}&id=@{id}&vdieo-url=@{url}"><img src="data/img/@{img}" /></a></dd></dl>',
+			knowledge: '<li><a href="info.html?type=@{type}&id=@{id}">@{title}</a></li>',
+			search: '<li><a href="info.html?type=@{type}&id=@{id}">@{xh}</a></li>'
+		};
+	var home = $('#home').get(0);
+	var info = $('#info').get(0);
+	var search = $('#search').get(0);
+	var nId = getUrlParam('id');
+	var pageType = getUrlParam( 'type' );
+
+	if( home ){
+		var htmlMode = pageIndexType[ pageType ];
+		var htmlArry = [];
+		var con = $('.item_list');
+		$.each( $.DATA, function(){
+			if( this.type == pageType ){
+				htmlArry.push( htmlMode.format( this ) );
+			}
+		});
+		con.html( htmlArry.join('') );
+	}
+
+	if( info ){
+		var htmlMode = pageMapHtml[ pageType ];
+		var htmlArry = [];
+		var con = $('.box');
+		$.each($.DATA, function(){
+			if( this.id == nId ){
+				htmlArry.push( htmlMode.format( this ) );
+			}
+		});
+		con.html( htmlArry.join('') );
+	}
+
+	if( search ){
+		var oInput = $('.search_input input');
+		var htmlMode = pageIndexType[ pageType ];
+
+		$('.search_input button').on('click',function(){
+			var str = oInput.val();
+			var reg = new RegExp( str, 'ig' );
+			var data = [];
+			var htmlData = [];
+			var con = $('.item_list');
+			$.each( window.model, function(){
+				for( var n in this ){
+					if( n != 'id' ){
+						if( reg.test( String( this[n] ).toLowerCase() ) ){
+							data.push( this );
+							break;
+						}
+					}
+				}
+			});
+			if( data.length > 0 ){
+				$.each(data, function(){
+					htmlData.push( htmlMode.format( this ) );
+				});
+			}else{
+				htmlData.push( '<li>未查到相关信息</li>' );
+			}
+			con.html( htmlData.join('')).show();
+		});
+	}
+
+	$('.icon_back').on('click',function(){
+		history.go(-1);
+	});
+
 
 	(function(){
 		var w = document.body.clientWidth;
@@ -102,13 +183,6 @@ $(function(){
 		var pageInfo;
 		var _pageInfo;
 		var _this;
-		var getPageInfo = function(){
-			var pageMapHtml = {
-				base: '<p>@{content}</p>',
-				video: '<div class="video"><video width="320" height="240" controls><source src="@{video_url}" type="video/mp4">您的浏览器不支持 video 标签。</video></div>',
-				product: '<div class="product"></div>'
-			}
-		};
 		// 绑定菜品区域
 		proBox.on('touchstart',function( e ){
 			if( loading ){
