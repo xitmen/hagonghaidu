@@ -327,7 +327,7 @@ window.model = [
   {
     "id":112,
     "pp": "KUKA",
-    "xh": "KR?6?R700?FIVVE",
+    "xh": "KR 6 R700 FIVVE",
     "gzkj": "706mm",
     "yxfh": "6kg",
     "gzkjfw": "500~1000mm",
@@ -340,7 +340,7 @@ window.model = [
   {
     "id":113,
     "pp": "KUKA",
-    "xh": "KR?6 R900 SIXX CR",
+    "xh": "KR 6 R900 SIXX CR",
     "gzkj": "901mm",
     "yxfh": "6kg",
     "gzkjfw": "500~1000mm",
