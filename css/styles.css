@@ -10,6 +10,7 @@
 }
 body {
   font-size: .7rem;
+  background-color: #fff;
 }
 .fixed_4 {
   padding-top: 4rem;
@@ -203,9 +204,6 @@ body {
 .school dd img {
   width: 15rem;
 }
-video {
-  width: 16rem;
-}
 iframe {
   border: 0 none;
   width: 15rem;
@@ -223,4 +221,29 @@ iframe {
   display: block;
   width: 14rem;
   margin: 0.5rem auto;
+}
+.deg90 {
+  -webkit-transform: scale(1.4) rotate(-45deg);
+  -moz-transform: scale(1.4) rotate(-45deg);
+  -o-transform: scale(1.4) rotate(-45deg);
+}
+.deg901 {
+  -webkit-transform: scale(1.4) rotate(90deg);
+  -moz-transform: scale(1.4) rotate(90deg);
+  -o-transform: scale(1.4) rotate(90deg);
+}
+.video {
+  width: 100%;
+}
+.video video {
+  position: absolute;
+  width: 100%;
+  height: auto;
+  max-height: 100%;
+  display: block;
+  font-size: 0;
+  margin-top: 1.5rem;
+}
+.box {
+  margin-top: 2rem;
 }
