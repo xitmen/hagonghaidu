@@ -247,7 +247,13 @@ iframe {
 .box {
   margin-top: 2rem;
 }
-.play{
-  width:16rem; height:8rem; background-color:#000;
-  color:#fff; line-height:8rem; text-align:center;
+.play {
+  width: 16rem;
+  height: 8.12rem;
+  background-color: #000;
+  color: #fff;
+  line-height: 8.12rem;
+  text-align: center;
+  background-size: contain;
+  background-repeat: no-repeat;
 }

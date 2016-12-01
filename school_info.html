@@ -23,11 +23,13 @@
     <script src="video/js/zy_control.js"></script>
     <script type="text/javascript">
     var webPath = '';
+    var img = '';
     var nId = window.name;
     var DATA = window.video;
     for( var i = 0; i < DATA.length; i++){
         if( DATA[i].id == nId ){
             webPath = DATA[i].url;
+            img = DATA[i].img;
         } 
     }
     window.uexOnload = function() {
@@ -92,9 +94,15 @@
             <a href="knowledge.html">小知识</a>
             <a href="search.html">机型速查</a>
         </div>
-        <div class="play" onclick="openPlayer(webPath);">点击播放</div>
+        <div class="play" onclick="openPlayer(webPath);"></div>
     </div>
 </body>
+<script type="text/javascript">
+    $(function(){
+        $('.play').css({
+            backgroundImage: 'url(data/img/'+ img +')'
+        })
+    });
 </script>
 </html>
 
