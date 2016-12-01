@@ -151,52 +151,7 @@ $(function(){
 		var con = $('.box');
 		var htmlArry = [];
 		if( type == 'school_info' ){
-			var webPath = DATA.url;
-			window.uexOnload = function() {
-				uexVideo.onPlayerStatusChange = function(info){
-					var data = JSON.parse(info);
-					document.getElementById('info1').innerHTML  = "播放器状态:" + data.status;
-				}
-				uexVideo.onPlayerClose = function(info){
-					var data = JSON.parse(info);
-					document.getElementById('info1').innerHTML  = "播放路径:" + data.src + "\n结束时的播放时间:" + data.currentTime;
-				}
-				uexVideo.onRecordFinish = function(info){
-					var data = JSON.parse(info);
-					localPath = data.path;
-					document.getElementById('info2').innerHTML  = "压缩进度:" + progress + "\n录制的视频地址:"+localPath;
-				}
-				uexVideo.onExportWithProgress = function(p){
-					progress = p;
-					document.getElementById('info2').innerHTML = "压缩进度:" + progress + "\n录制的视频地址:"+localPath;
-				}
-			};
-			function recordVideo(){
-				var params={
-					maxDuration:document.getElementById('maxDuration').value,
-					qualityType:document.getElementById('qualityType').value,
-					bitRateType:document.getElementById('bitRateType').value,
-					fileType:document.getElementById('fileType').value,
-				}
-				uexVideo.record(JSON.stringify(params));
-			}
-			function openPlayer(path){
-				var param = {
-					src:path,
-					startTime:1,
-					autoStart:true,
-					forceFullScreen:false,
-					showCloseButton:true,
-					showScaleButton:true,
-					width:320,
-					height:240,
-					x:10,
-					y:400,
-					scrollWithWeb:true,
-				}
-				uexVideo.openPlayer(JSON.stringify(param));
-			}
-			openPlayer(webPath);
+			
 		}else{
 			$.each( DATA, function(){
 				if( this.id == nId ){

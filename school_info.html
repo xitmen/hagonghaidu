@@ -17,9 +17,62 @@
     <link rel="stylesheet" href="video/css/ui-res.css">
     <link rel="stylesheet" href="video/css/ui-btn.css">
     <link rel="stylesheet" href="video/css/index.css">
+    <script src="data/video.js"></script>
+    <script src="js/jquery-1.9.0.min.js"></script>
+    <script src="js/base.js?_=v1.2"></script>
     <script src="video/js/zy_control.js"></script>
+    <script type="text/javascript">
+    var webPath = '';
+    var nId = window.name;
+    var DATA = window.video;
+    for( var i = 0; i < DATA.length; i++){
+        if( DATA[i].id == nId ){
+            webPath = DATA[i].url;
+        } 
+    }
+    window.uexOnload = function() {
+        uexVideo.onPlayerStatusChange = function(info){
+            var data = JSON.parse(info);
+            document.getElementById('info1').innerHTML  = "播放器状态:" + data.status;
+        }
+        uexVideo.onPlayerClose = function(info){
+            var data = JSON.parse(info);
+            document.getElementById('info1').innerHTML  = "播放路径:" + data.src + "\n结束时的播放时间:" + data.currentTime;
+        }
+        uexVideo.onRecordFinish = function(info){
+            var data = JSON.parse(info);
+            localPath = data.path;
+            document.getElementById('info2').innerHTML  = "压缩进度:" + progress + "\n录制的视频地址:"+localPath;
+        }
+        uexVideo.onExportWithProgress = function(p){
+            progress = p;
+            document.getElementById('info2').innerHTML = "压缩进度:" + progress + "\n录制的视频地址:"+localPath;
+        }
+    };
+    function recordVideo(){
+        var params={
+            maxDuration:document.getElementById('maxDuration').value,
+            qualityType:document.getElementById('qualityType').value,
+            bitRateType:document.getElementById('bitRateType').value,
+            fileType:document.getElementById('fileType').value,
+        }
+        uexVideo.record(JSON.stringify(params));
+    }
+    function openPlayer(path){
+        var param = {
+            src:path,
+            startTime:1,
+            autoStart:true,
+            forceFullScreen:true,
+            showCloseButton:true,
+            showScaleButton:true,
+            scrollWithWeb:true,
+        }
+        uexVideo.openPlayer(JSON.stringify(param));
+    }
+    </script>
 </head>
-<body id="info" type="school_info">
+<body class="fixed_4" id="info" type="school_info">
     <div class="lef_nav close">
         <h1>
             <p>哈工海渡教学<span>学海无涯,同舟共渡</span></p>
@@ -35,20 +88,14 @@
     </div>
     <div class="content">
         <div class="top_nav">
-            <a href="school.html">学院</a>
+            <a href="school.html" class="on">学院</a>
             <a href="knowledge.html">小知识</a>
             <a href="search.html">机型速查</a>
         </div>
-        <div class="box">
-
-        </div>
+        <div class="play" onclick="openPlayer(webPath);">点击播放</div>
     </div>
 </body>
-<script src="data/knowledge.js"></script>
-<script src="data/model.js"></script>
-<script src="data/video.js"></script>
-<script src="js/jquery-1.9.0.min.js"></script>
-<script src="js/base.js?_=v1.1"></script>
+</script>
 </html>
 
 

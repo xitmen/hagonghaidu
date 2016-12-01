@@ -247,3 +247,7 @@ iframe {
 .box {
   margin-top: 2rem;
 }
+.play{
+  width:16rem; height:8rem; background-color:#000;
+  color:#fff; line-height:8rem; text-align:center;
+}
