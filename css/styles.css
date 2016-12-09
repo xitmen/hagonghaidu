@@ -194,15 +194,19 @@ body {
 .school {
   padding: .5rem;
   border-bottom: 1px solid #ccc;
+  overflow: hidden;
 }
-.school dl {
-  font-size: 0.8rem;
+.school dt {
+  font-size: .6rem;
+  width: 8.5rem;
+  float: right;
 }
 .school dd {
-  width: 15rem;
+  width: 6rem;
+  float: left;
 }
 .school dd img {
-  width: 15rem;
+  width: 6rem;
 }
 iframe {
   border: 0 none;
